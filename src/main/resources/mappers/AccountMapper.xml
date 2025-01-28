@@ -1,0 +1,12 @@
+<mapper namespace="com.interview.test.tuumaccountservice.mybatis.AccountMapper">
+    <select id="findAccountById" resultType="AccountEntity">
+        SELECT account_id AS accountId, country, customer_id AS customerId
+        FROM Account
+        WHERE account_id = #{accountId}::uuid;
+    </select>
+
+    <insert id="insertAccount">
+        INSERT INTO Account (accountId, country, customerId)
+        VALUES (#{accountId}::uuid, #{country}, #{customerId}::uuid);
+    </insert>
+</mapper>

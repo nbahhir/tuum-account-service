@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.interview.test.tuumaccountservice.entities"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler javaType="java.util.UUID" handler="com.interview.test.tuumaccountservice.typehandlers.UuidTypeHandler"/>
+    </typeHandlers>
+    <mappers>
+        <mapper class="com.interview.test.tuumaccountservice.mybatis.AccountMapper"/>
+        <mapper class="com.interview.test.tuumaccountservice.mybatis.BalanceMapper"/>
+        <mapper class="com.interview.test.tuumaccountservice.mybatis.TransactionMapper"/>
+    </mappers>
+</configuration>

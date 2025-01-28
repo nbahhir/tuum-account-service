@@ -1,0 +1,10 @@
+<mapper namespace="com.interview.test.tuumaccountservice.mybatis.TransactionMapper">
+    <select id="findTransactionsByAccountId" resultType="TransactionEntity">
+        SELECT transactionId, accountId, amount, balanceAfterTransaction, currency, direction, description FROM Transaction WHERE transactionId = #{transactionId};
+    </select>
+
+    <insert id="insertTransaction">
+        INSERT INTO Transaction (transactionId, accountId, amount, balanceAfterTransaction, currency, direction, description ) VALUES ( #{transactionId}, #{accountId}, #{amount}, #{balanceAfterTransaction}, #{currency}, #{direction}, #{description} );
+    </insert>
+
+</mapper>

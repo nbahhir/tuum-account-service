@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: tuum-account-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:db/migration
+  mybatis:
+    mapper-locations: classpath:mappers/*.xml
+    type-handlers-package: com.interview.test.tuumaccountservice.typehandlers
+    type-aliases-package: com.interview.test.tuumaccountservice.entities

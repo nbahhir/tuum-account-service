@@ -1,0 +1,18 @@
+<mapper namespace="com.interview.test.tuumaccountservice.mybatis.BalanceMapper">
+    <select id="findBalancesByAccountId" resultType="Balance">
+        <!-- FOR UPDATE here to prevent multiple instances to change the same entry while processing -->
+        SELECT balanceId, accountId, currency, amount
+        FROM Balance
+        WHERE accountId = #{accountId}
+        FOR UPDATE;
+    </select>
+
+    <insert id="insertBalance">
+        INSERT INTO Balance (balanceId, accountId, currency, amount)
+        VALUES (#{balanceId}, #{accountId}, #{currency}, #{amount});
+    </insert>
+
+    <update id="updateBalance">
+        UPDATE Balance SET amount = #{amount} WHERE balanceId = #{balanceId};
+    </update>
+</mapper>
