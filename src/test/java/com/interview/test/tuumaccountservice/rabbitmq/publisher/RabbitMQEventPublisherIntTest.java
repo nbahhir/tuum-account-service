@@ -23,7 +23,7 @@ import java.util.UUID;
 public class RabbitMQEventPublisherIntTest {
 
     @Container
-    private static final RabbitMQContainer rabbitMQ = new RabbitMQContainer("rabbitmq:4.0")
+    private static final RabbitMQContainer rabbitMQ = new RabbitMQContainer("rabbitmq:management")
             .withExposedPorts(5672, 15672);
 
     @Container

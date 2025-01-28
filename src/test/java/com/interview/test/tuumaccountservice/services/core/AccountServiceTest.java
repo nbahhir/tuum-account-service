@@ -4,6 +4,7 @@ import com.interview.test.tuumaccountservice.converter.EntityToDtoConverter;
 import com.interview.test.tuumaccountservice.dto.Account;
 import com.interview.test.tuumaccountservice.entities.AccountEntity;
 import com.interview.test.tuumaccountservice.mybatis.AccountMapper;
+import com.interview.test.tuumaccountservice.rabbitmq.publisher.RabbitMQEventPublisher;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Assertions;
@@ -29,6 +30,8 @@ class AccountServiceTest {
     AccountMapper accountMapperMock;
     @Mock
     EntityToDtoConverter converterMock;
+    @Mock
+    RabbitMQEventPublisher publisher;
 
     @InjectMocks
     AccountService accountService;

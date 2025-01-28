@@ -6,6 +6,7 @@ import com.interview.test.tuumaccountservice.entities.TransactionEntity;
 import com.interview.test.tuumaccountservice.enums.BalanceCurrency;
 import com.interview.test.tuumaccountservice.enums.TransactionDirection;
 import com.interview.test.tuumaccountservice.mybatis.TransactionMapper;
+import com.interview.test.tuumaccountservice.rabbitmq.publisher.RabbitMQEventPublisher;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Assertions;
@@ -32,6 +33,8 @@ class TransactionServiceTest {
     TransactionMapper transactionMapperMock;
     @Mock
     EntityToDtoConverter converterMock;
+    @Mock
+    RabbitMQEventPublisher publisher;
 
     @InjectMocks
     TransactionService transactionService;

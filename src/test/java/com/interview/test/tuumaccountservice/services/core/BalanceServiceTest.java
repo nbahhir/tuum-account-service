@@ -5,6 +5,7 @@ import com.interview.test.tuumaccountservice.dto.Balance;
 import com.interview.test.tuumaccountservice.entities.BalanceEntity;
 import com.interview.test.tuumaccountservice.enums.BalanceCurrency;
 import com.interview.test.tuumaccountservice.mybatis.BalanceMapper;
+import com.interview.test.tuumaccountservice.rabbitmq.publisher.RabbitMQEventPublisher;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Assertions;
@@ -31,6 +32,8 @@ class BalanceServiceTest {
     BalanceMapper balanceMapperMock;
     @Mock
     EntityToDtoConverter converterMock;
+    @Mock
+    RabbitMQEventPublisher publisher;
 
     @InjectMocks
     BalanceService balanceService;

@@ -16,7 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -32,15 +34,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Testcontainers
+@Transactional
 class TuumAccountServiceControllerIntTest {
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.2");
+
+    @Container
+    static RabbitMQContainer rabbitMQ = new RabbitMQContainer("rabbitmq:4.0")
+            .withExposedPorts(15672, 5672);
 
     @DynamicPropertySource
     public static void properties(DynamicPropertyRegistry props) {
         props.add("spring.datasource.url", postgres::getJdbcUrl);
         props.add("spring.datasource.username", postgres::getUsername);
         props.add("spring.datasource.password", postgres::getPassword);
+
+        props.add("spring.rabbitmq.host", rabbitMQ::getHost);
+        props.add("spring.rabbitmq.port", () -> rabbitMQ.getMappedPort(5672));
     }
 
     @Autowired

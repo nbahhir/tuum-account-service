@@ -1,5 +1,6 @@
 services:
   postgres:
+    container_name: 'postgres-db'
     image: 'postgres:15'
     environment:
       - 'POSTGRES_DB=mydatabase'
@@ -8,9 +9,11 @@ services:
     ports:
       - '5432:5432'
   rabbitmq:
-    image: 'rabbitmq:4.0'
+    container_name: 'rabbit'
+    image: 'rabbitmq:management'
     environment:
       - 'RABBITMQ_DEFAULT_PASS=secret'
       - 'RABBITMQ_DEFAULT_USER=myuser'
     ports:
+      - '15672:15672'
       - '5672:5672'
