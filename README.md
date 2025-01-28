@@ -82,18 +82,17 @@ First of all, the repository needs to be cloned. Then, the project needs to be b
 This way, the built .jar file will be located at ./build/libs/*.jar
 
 ## Running locally
-My project doesn't have the Dockerfile, meaning that containers and app need to be run separately.
-Containers that will be run are defined in the docker-compose file in the directory. There are only rabbitMq and postgre.
-You can run these by simply executing
+You can run the app either by running
 ```
 docker-compose up
 ```
-While in the directore with docker-compose file. Next, the app should be run either by simply running the MainApplication class in the src/main/java/com/interview/test/tuumaccountservice/TuumAccountServiceApplication.java.
-Or by running the built .jar file with the
+Since the app itself have Dockerfile and is part of docker container system.
+
+You can also separately run the jar of the build project. However, you will still need to compose-up to run postgres and rabbit mq.
 ```
 java -jar build/libs/the-app-name.jar
 ```
-This SHOULD run.
+
 ## Testing
 Testing could be run by using the 
 ```
@@ -101,4 +100,33 @@ Testing could be run by using the
 ```
 Command.
 
+# Estimating how many transactions my PC can handle
+For the estimation I used k6 tool with hand-written java script code that calls my transaction creation endpoint.
+
+Results can be seen here
+![image](https://github.com/user-attachments/assets/bac75d93-8a3b-42e0-8dad-80976837cf51)
+
+Main points here:
+- Total Requests: 2235
+- Test Duration: 50 seconds
+- Average HTTP Response Time: 2.3ms
+- Max Virtual Users: 100
+- Failed Requests (http_req_failed): 0% (meaning all requests were successfully processed)
+
+Next, if we divide total requests by total test duration time, we get the result of 44.7 transactions per second.
+
+This analysis also showed that the average response time was fairly short (2.3 ms) and that the system could handle 100 users at the same time. Furthermore, there were no failed requests.
+
+# Describe what do you have to consider to be able to scale applications horizontally
+Well, there are certainly a lot of things.
+First of all, database load will increase drastically when increasing the number of instances.
+For this issue, optimizing queries and using cache solution like Redis can help to remedy the situation.
+
+It is also important to consider concurrency questions. With increasing number of instances the chances of conflicts will arise. It is very important code with concurrency in mind. For example, like I used in my application, we can use many mechanisms to avoid concurrency issues. Like pessimistic locking.
+
+Makes sense to think of some gateway for REST requests.
+
+Need to be careful with shared states between instances. Shared data in distributed systems environment is unpredictable and risky. Better to persist data in storage like PostGres and keep away from in-memory storage.
+
+Load between instances can become uneven, and something that manages the load would be needed in this case, like cloud load balancers.
 
