@@ -17,3 +17,20 @@ services:
     ports:
       - '15672:15672'
       - '5672:5672'
+  tuum-account-service:
+    build:
+      context: .
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/mydatabase
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SPRING_RABBITMQ_HOST=rabbit
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=myuser
+      - SPRING_RABBITMQ_PASSWORD=secret
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+      - rabbitmq
+
