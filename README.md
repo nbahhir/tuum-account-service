@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/224ce1b2-5fe8-4c78-aba3-df6e765870f2)# Created by Nikita Bahhir for Tuum interview process
+Created by Nikita Bahhir for Tuum interview process
 # Overview
 To start writing is the hardest part of making any sort of documentation.
 I will begin by providing a brief overview of the app.
