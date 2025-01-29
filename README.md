@@ -1,4 +1,4 @@
-# Created by Nikita Bahhir for Tuum interview process
+![image](https://github.com/user-attachments/assets/224ce1b2-5fe8-4c78-aba3-df6e765870f2)# Created by Nikita Bahhir for Tuum interview process
 # Overview
 To start writing is the hardest part of making any sort of documentation.
 I will begin by providing a brief overview of the app.
@@ -48,6 +48,13 @@ Here are the list of available endpoints for this app:
 - GET /api/accounts/{accountId} - get account by accountId. The only and mandatory field is accountId (which is UUID). Returns the accountId, customerId and a list of balances (currency and amount).
 - POST /api/transactions/create - This creates a transaction. Every field is mandatory. The inputs are: accountId, amount of money (should be valid number, max 2 decimal points), currency (should be valid ISO), direction (no more than 10 letters, just to prevent injection) and description (only letters, whitespaces and common punctuation). Transactions change the Balances and thus there are a lot of validation for sufficient funds etc. Returns the created transactionId, accountId, amount of money transfered, currency, direction of transfer, description and overall balance after the transaction.
 - GET /api/transactions/{accountId} - Gets all transaction associated with this accountId. Returns the same thing as the previous endpoint.
+
+## Endpoint examples
+- POST to create account
+  ![image](https://github.com/user-attachments/assets/86d37043-be30-426f-b840-ad2d0b9638b6)
+- POST to create transaction
+  ![image](https://github.com/user-attachments/assets/1197abae-2538-45b1-bd42-96e5c085600e)
+
 
 ## Testing
 Probably the hardest part for me. For my integration testing, I've decided to use Junit 5's TestContainers to spin up some docker containers for integration testing. I didn't feel good about testing the database operations using the in-memory. Haven't used Testcontainers that much before, but I can say it is fairly simple and comfortable to use.
